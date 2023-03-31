@@ -55,7 +55,7 @@ public class Employee {
 	private String panNo;
 	
 	@Column(name="aadhaar_num")
-	@AadhaarNoConstraint(message = "Please input numeric only! Maximum 12 characters")
+	@AadhaarNoConstraint(message = "Please input numeric only! Maximum 12 character")
 	private String aadhaarNo;
 	
 	@NotEmpty(message = "Please input valid mobile #")
