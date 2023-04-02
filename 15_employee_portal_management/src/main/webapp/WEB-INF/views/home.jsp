@@ -146,7 +146,7 @@ body {
 				<td class="td">${emp.mobileNo}<br>${emp.emailId}</td>
 				<td class="td">${emp.empLevel}/<br>${emp.postName}</td>
 				<td class="td"><a href="/history/${emp.empId}">Employments</a>|<a
-					href="/home/${emp.empId}">Delete</a>|<a href="/input/${emp.empId}">Edit</a></td>
+					href="/home/${emp.empId}">Delete</a>|<a href="/input/${emp.empId}">Edit</a>|<a href="/addImg/${emp.empId}">Image</a></td>
 			</tr>
 		</c:forEach>
 	</table>
