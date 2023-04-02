@@ -19,10 +19,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.deloitte.portal.model.EmpImg;
 import com.deloitte.portal.model.Employee;
 import com.deloitte.portal.model.EmployeeHistory;
+import com.deloitte.portal.service.EmpImgServiceImpl;
 import com.deloitte.portal.service.EmployeeService;
 
 import jakarta.validation.Valid;
@@ -32,6 +36,9 @@ public class PortalController {
 
 	@Autowired
 	EmployeeService employeeService;
+	
+	@Autowired
+	EmpImgServiceImpl empImgService;
 
 	@RequestMapping("/home")
 	public ModelAndView home() {
@@ -77,6 +84,28 @@ public class PortalController {
 		}
 
 	}
+	
+	@RequestMapping(value="/addImg/{id}", method = RequestMethod.GET)
+	public ModelAndView imgPage(@PathVariable("id") int emp_id, @ModelAttribute("empImg") EmpImg empImg) {
+		//ModelAndView mav= new ModelAndView("addImg");
+		//empImgService.uploadImg(img);
+		//String msg="Image uploaded successfully!";
+		//return new ModelAndView("addImg","successMsg",msg);
+		return new ModelAndView("addImg","id",emp_id);
+	}
+	
+	@RequestMapping(value = "/saveImg", method = RequestMethod.POST)
+	public ModelAndView uploadImg(@RequestParam("img") MultipartFile img, @ModelAttribute("empImg") EmpImg empImg) {
+		empImgService.uploadImg(img);
+		String msg="Image uploaded successfully!";
+		return new ModelAndView("addImg","successMsg",msg);
+	}
+	
+	/*
+	 * public MultipartFile getImg() {
+	 * 
+	 * }
+	 */
 	
 	@RequestMapping("/input/{empId}")
 	public ModelAndView edit(@PathVariable("empId") int id) {

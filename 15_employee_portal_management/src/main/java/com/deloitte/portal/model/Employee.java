@@ -3,6 +3,8 @@ package com.deloitte.portal.model;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.deloitte.portal.constraints.AadhaarNoConstraint;
 import com.deloitte.portal.constraints.AgeConstraint;
 import com.deloitte.portal.constraints.PanNoConstraint;
@@ -11,6 +13,7 @@ import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
@@ -22,11 +25,15 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity(name = "employees")
 @Table(name = "employees", uniqueConstraints = {@UniqueConstraint(columnNames = {"email_id","office_mail","emp_id"})})
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Employee {
 	
 	@Id
@@ -86,8 +93,11 @@ public class Employee {
 	@Column(name="blood_group")
 	private String bloodGroup;
 	
+	@Lob
 	@Column(name="profile_pict")
-	private String profilePic;
+	private byte[] profilePic;
+	
+	//public MultipartFile img;
 	
 	@NotBlank(message = "Please input a valid DoJ!")
 	private String doj;
